@@ -1,4 +1,13 @@
 # foodgram-mobile
+
+## setup react native environment (macOS)
+install expo-cli
+```
+sudo npm i -g expo-cli
+```
+add expo client from the app store
+```
+```
 create and move into the foodgram-mobile directory
 ```
 mkdir foodgram
