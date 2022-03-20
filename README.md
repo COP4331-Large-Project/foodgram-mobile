@@ -36,3 +36,4 @@ install react native gesture handler
 ```
 sudo npm install react-native-gesture-handler
 ```
+open Xcode simulator, and from localhost webpage click on Run on iOS simulator. App will show up on iphone simulator. Cool thing about this is when you refresh the code on vscode you can see the changes immediately on the phone simulator.
