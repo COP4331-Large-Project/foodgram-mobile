@@ -5,7 +5,7 @@ install expo-cli
 ```
 sudo npm i -g expo-cli
 ```
-add expo client from the app store
+downloaf expo client from the app store
 ```
 https://apps.apple.com/us/app/expo-go/id982107779
 ```
@@ -23,7 +23,7 @@ move into foodgram-mobile directory and make sure the install is working
 cd foodgram-mobile
 sudo npm start
 ```
-open a web browser and enter (There should be a Metro bundler page if everything went correctly)
+open a web browser and enter localhost (There should be a Metro bundler page if everything went correctly)
 ```
 localhost:19002
 ```
