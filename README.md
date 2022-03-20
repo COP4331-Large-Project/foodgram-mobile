@@ -23,8 +23,17 @@ move into foodgram-mobile directory and make sure the install is working
 cd foodgram-mobile
 sudo npm start
 ```
-open a web browser and enter:
+open a web browser and enter (There should be a Metro bundler page if everything went correctly)
 ```
 localhost:19002
 ```
-there should be a Metro bundler page if everything went correctly
+install react native navigation libraries
+```
+sudo npm install react-navigation
+sudo npm install react-navigation-stack
+```
+install react native gesture handler
+```
+sudo npm install react-native-gesture-handler
+```
+```
