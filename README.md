@@ -7,6 +7,7 @@ sudo npm i -g expo-cli
 ```
 add expo client from the app store
 ```
+https://apps.apple.com/us/app/expo-go/id982107779
 ```
 create and move into the foodgram-mobile directory
 ```
