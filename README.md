@@ -1,6 +1,6 @@
 # foodgram-mobile
 
-## setup react native environment (macOS)
+## setup react native with expo environment (macOS)
 install expo-cli
 ```
 sudo npm i -g expo-cli
