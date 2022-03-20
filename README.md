@@ -14,7 +14,7 @@ install react native gesture handler
 ```
 sudo npm install react-native-gesture-handler
 ```
-download expo client from the app store
+download expo client on your phone from the app store
 ```
 https://apps.apple.com/us/app/expo-go/id982107779
 ```
