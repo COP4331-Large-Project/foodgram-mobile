@@ -17,4 +17,4 @@ open a web browser and enter:
 ```
 localhost:19002
 ```
-there should be a default react page if everything went correctly
+there should be a Metro bundler page if everything went correctly
