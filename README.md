@@ -36,4 +36,3 @@ install react native gesture handler
 ```
 sudo npm install react-native-gesture-handler
 ```
-```
