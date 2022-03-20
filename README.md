@@ -5,7 +5,7 @@ install expo-cli
 ```
 sudo npm i -g expo-cli
 ```
-downloaf expo client from the app store
+download expo client from the app store
 ```
 https://apps.apple.com/us/app/expo-go/id982107779
 ```
