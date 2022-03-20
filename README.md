@@ -5,6 +5,15 @@ install expo-cli
 ```
 sudo npm i -g expo-cli
 ```
+install react native navigation libraries
+```
+sudo npm install react-navigation
+sudo npm install react-navigation-stack
+```
+install react native gesture handler
+```
+sudo npm install react-native-gesture-handler
+```
 download expo client from the app store
 ```
 https://apps.apple.com/us/app/expo-go/id982107779
@@ -26,14 +35,5 @@ sudo npm start
 open a web browser and enter localhost (There should be a Metro bundler page if everything went correctly)
 ```
 localhost:19002
-```
-install react native navigation libraries
-```
-sudo npm install react-navigation
-sudo npm install react-navigation-stack
-```
-install react native gesture handler
-```
-sudo npm install react-native-gesture-handler
 ```
 open Xcode simulator, and from localhost webpage click on Run on iOS simulator. App will show up on iphone simulator. Cool thing about this is when you refresh the code on vscode you can see the changes immediately on the phone simulator. (NOTE: you can also use the QR code on your phone and it will bring it up using the expo app on your phone)
