@@ -36,4 +36,4 @@ open a web browser and enter localhost (There should be a Metro bundler page if 
 ```
 localhost:19002
 ```
-open Xcode simulator, and from localhost webpage click on Run on iOS simulator. App will show up on iphone simulator. Cool thing about this is when you refresh the code on vscode you can see the changes immediately on the phone simulator. (NOTE: you can also use the QR code on the Metro Bundler page with your phone and it will bring up our app using expo on your phone)
+open Xcode simulator, and from localhost webpage click on Run on iOS simulator. App will show up on iphone simulator. Cool thing about this is when you refresh the code on vscode you can see the changes immediately on the phone simulator. (NOTE: you can also scan the QR code on the Metro Bundler page with your phone and it will bring up our app using expo on your phone)
