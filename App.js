@@ -1,13 +1,40 @@
-// import { StatusBar } from 'expo-status-bar';
-// import { StyleSheet, Text, View, Button, Alert, TextInput } from 'react-native';
-import { normalizeRect } from 'react-native/Libraries/StyleSheet/Rect';
-import React from "react";
-import { View } from "react-native";
-import LoginScreen from './src/screens/LoginScreen';
+import React from 'react';
+import { Provider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator, createStackNavigator } from '@react-navigation/native-stack';
+import { theme } from './src/core/theme';
+import { ActivityIndicator } from 'react-native';
+import {
+  StartScreen,
+  LoginScreen,
+  RegisterScreen,
+  ResetPasswordScreen,
+  Dashboard,
+} from './src/screens';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <LoginScreen />
+    <Provider theme={theme}>
+      <NavigationContainer>
+        <Stack.Navigator
+          initialRouteName="StartScreen"
+          screenOptions={{
+            headerShown: false,
+          }}
+        >
+          <Stack.Screen name="StartScreen" component={StartScreen} />
+          <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
+          <Stack.Screen name="Dashboard" component={Dashboard} />
+          <Stack.Screen
+            name="ResetPasswordScreen"
+            component={ResetPasswordScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
