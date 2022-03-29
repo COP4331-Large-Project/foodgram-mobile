@@ -3,7 +3,6 @@ import { Provider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator, createStackNavigator } from '@react-navigation/native-stack';
 import { theme } from './src/core/theme';
-import { ActivityIndicator } from 'react-native';
 import {
   StartScreen,
   LoginScreen,
