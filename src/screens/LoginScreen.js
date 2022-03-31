@@ -29,6 +29,42 @@ export default function LoginScreen({ navigation }) {
     })
   }
 
+  // const [loginName, setUsername] = useState({ value: '', error: '' })
+  // const [loginPassword, setPassword] = useState({ value: '', error: '' })
+  // let bp = require('./Path.js');
+
+  // const doLogin = async event => 
+  //   {
+  //       event.preventDefault();
+  //       var obj = {login:loginName.value,password:loginPassword.value};
+  //       var js = JSON.stringify(obj);
+  //       try
+  //       {    
+  //         const response = await fetch(bp.buildPath('api/login'),
+  //         {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+  //           var res = JSON.parse(await response.text());
+  //           if( res.id <= 0 )
+  //           {
+  //               setMessage('User/Password combination incorrect');
+  //           }
+  //           else
+  //           {
+  //               var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+  //               localStorage.setItem('user_data', JSON.stringify(user));
+  //               setMessage('');
+  //               navigation.reset({
+  //                     index: 0,
+  //                     routes: [{ name: 'Dashboard' }],
+  //               })
+  //           }
+  //       }
+  //       catch(e)
+  //       {
+  //           console.log(e.toString());
+  //           return;
+  //       }    
+  //   };
+
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
