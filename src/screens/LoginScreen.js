@@ -10,65 +10,88 @@ import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { usernameValidator } from '../helpers/usernameValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
+import Dashboard from './Dashboard'
 
 export default function LoginScreen({ navigation }) {
+  // const [username, setUsername] = useState({ value: '', error: '' })
+  // const [password, setPassword] = useState({ value: '', error: '' })
+
+  // const onLoginPressed = () => {
+  //   const usernameError = usernameValidator(username.value)
+  //   const passwordError = passwordValidator(password.value)
+  //   if (usernameError || passwordError) {
+  //     setUsername({ ...username, error: usernameError })
+  //     setPassword({ ...password, error: passwordError })
+  //     return
+  //   }
+  //   navigation.reset({
+  //     index: 0,
+  //     routes: [{ name: 'Dashboard' }],
+  //   })
+  // }
+
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [message, setMessage] = useState('');
 
-  const onLoginPressed = () => {
-    const usernameError = usernameValidator(username.value)
-    const passwordError = passwordValidator(password.value)
-    if (usernameError || passwordError) {
-      setUsername({ ...username, error: usernameError })
-      setPassword({ ...password, error: passwordError })
-      return
-    }
-    navigation.reset({
-      index: 0,
-      routes: [{ name: 'Dashboard' }],
-    })
-  }
+  const onLoginPressed = async event => 
+    {
+        event.preventDefault();
+        var obj = {login:username.value,password:password.value};
+        var js = JSON.stringify(obj);
+        try
+        {    
+          const response = await fetch('https://foodgram-demo.herokuapp.com/api/login',
+          {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+            var res = JSON.parse(await response.text());
+            // console.log(res.id);
+            if( res.id <= 0 || res.id == undefined)
+            {
+                setMessage('User/Password combination incorrect');
+            }
+            else
+            {
+                console.log(res.id);
+                var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+                //localStorage.setItem('user_data', JSON.stringify(user));
+                setMessage('SUCCESS');
+                console.log(message);
+                navigation.navigate(Dashboard);
+            }
+        }
+        catch(e)
+        {
+            console.log(e.toString());
+            return;
+        }    
+    };
 
-  // const [loginName, setUsername] = useState({ value: '', error: '' })
-  // const [loginPassword, setPassword] = useState({ value: '', error: '' })
-  // let bp = require('./Path.js');
+  // const [message, setMessage] = useState('');
 
-  // const doLogin = async event => 
-  //   {
-  //       event.preventDefault();
-  //       var obj = {login:loginName.value,password:loginPassword.value};
-  //       var js = JSON.stringify(obj);
-  //       try
-  //       {    
-  //         const response = await fetch(bp.buildPath('api/login'),
-  //         {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-  //           var res = JSON.parse(await response.text());
-  //           if( res.id <= 0 )
-  //           {
-  //               setMessage('User/Password combination incorrect');
-  //           }
-  //           else
-  //           {
-  //               var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-  //               localStorage.setItem('user_data', JSON.stringify(user));
-  //               setMessage('');
-  //               navigation.reset({
-  //                     index: 0,
-  //                     routes: [{ name: 'Dashboard' }],
-  //               })
-  //           }
+  // const onLoginPressed = async()=>{
+  //   if(username!="" && password!=""){
+  //     await fetch('https://foodgram-demo.herokuapp.com/api/login',{
+  //       method:'POST',
+  //       headers:{
+  //         'Accept': 'application/json',
+  //         'Content-type': 'application/json'
+  //       },
+  //       body:{
+  //         'login': username,
+  //         'password': password
   //       }
-  //       catch(e)
-  //       {
-  //           console.log(e.toString());
-  //           return;
-  //       }    
-  //   };
-
+  //     }).then(res => res.json())
+  //     .then(resData =>{
+  //       //alert(resData.message);
+  //       setMessage('Sucessfully Logged');
+  //     })
+  //   }
+  // }
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
+      <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
       <TextInput
         label="Username"
         returnKeyType="next"
