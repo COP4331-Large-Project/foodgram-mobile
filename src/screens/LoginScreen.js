@@ -13,29 +13,21 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import Dashboard from './Dashboard'
 
 export default function LoginScreen({ navigation }) {
-  // const [username, setUsername] = useState({ value: '', error: '' })
-  // const [password, setPassword] = useState({ value: '', error: '' })
-
-  // const onLoginPressed = () => {
-  //   const usernameError = usernameValidator(username.value)
-  //   const passwordError = passwordValidator(password.value)
-  //   if (usernameError || passwordError) {
-  //     setUsername({ ...username, error: usernameError })
-  //     setPassword({ ...password, error: passwordError })
-  //     return
-  //   }
-  //   navigation.reset({
-  //     index: 0,
-  //     routes: [{ name: 'Dashboard' }],
-  //   })
-  // }
-
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [message, setMessage] = useState('');
 
   const onLoginPressed = async event => 
   {
+    const usernameError = usernameValidator(username.value)
+    const passwordError = passwordValidator(password.value)
+
+    if (usernameError || passwordError) {
+      setUsername({ ...username, error: usernameError })
+      setPassword({ ...password, error: passwordError })
+      return
+    }
+
     event.preventDefault();
     var obj = {login:username.value,password:password.value};
     var js = JSON.stringify(obj);
@@ -66,27 +58,6 @@ export default function LoginScreen({ navigation }) {
     }    
   };
 
-  // const [message, setMessage] = useState('');
-
-  // const onLoginPressed = async()=>{
-  //   if(username!="" && password!=""){
-  //     await fetch('https://foodgram-demo.herokuapp.com/api/login',{
-  //       method:'POST',
-  //       headers:{
-  //         'Accept': 'application/json',
-  //         'Content-type': 'application/json'
-  //       },
-  //       body:{
-  //         'login': username,
-  //         'password': password
-  //       }
-  //     }).then(res => res.json())
-  //     .then(resData =>{
-  //       //alert(resData.message);
-  //       setMessage('Sucessfully Logged');
-  //     })
-  //   }
-  // }
   return (
     <Background>
       <BackButton goBack={navigation.goBack} />

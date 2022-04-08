@@ -38,43 +38,42 @@ export default function RegisterScreen({ navigation }) {
       setPassword({ ...password, error: passwordError })
       return
     }
-    else
-    {
-      event.preventDefault();
-       
-      var obj = 
-      {FirstName:firstName.value,
-      LastName:lastName.value,
-      Login:username.value,
-      Password:password.value, 
-      Email:email.value
-      };
 
-      var js = JSON.stringify(obj);
+    event.preventDefault();
+      
+    var obj = 
+    {FirstName:firstName.value,
+    LastName:lastName.value,
+    Login:username.value,
+    Password:password.value, 
+    Email:email.value
+    };
 
-      try
-      {    
-        const response = await fetch('https://foodgram-demo.herokuapp.com/api/register',
-              {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-        var res = JSON.parse(await response.text());
-        if( res.id <= 0 )
-        {
-            setMessage(res.error);
-        }
-        else
-        {
-            var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-            // localStorage.setItem('user_data', JSON.stringify(user));
-            setMessage('');
-            navigation.navigate(LoginScreen);
-        }
-      }
-      catch(e)
+    var js = JSON.stringify(obj);
+
+    try
+    {    
+      const response = await fetch('https://foodgram-demo.herokuapp.com/api/register',
+            {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+      var res = JSON.parse(await response.text());
+      if( res.id <= 0 )
       {
-          console.log(e.toString());
-          return;
-      }    
-    }   
+          setMessage(res.error);
+      }
+      else
+      {
+          var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+          // localStorage.setItem('user_data', JSON.stringify(user));
+          setMessage('');
+          navigation.navigate(LoginScreen);
+      }
+    }
+    catch(e)
+    {
+        console.log(e.toString());
+        return;
+    }    
+  
   };
 
   return (
