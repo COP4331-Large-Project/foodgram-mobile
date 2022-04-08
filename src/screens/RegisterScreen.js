@@ -13,6 +13,7 @@ import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { firstNameValidator } from '../helpers/firstNameValidator'
 import { lastNameValidator } from '../helpers/lastNameValidator'
+import LoginScreen from './LoginScreen'
 
 export default function RegisterScreen({ navigation }) {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
@@ -21,12 +22,14 @@ export default function RegisterScreen({ navigation }) {
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
 
-  const onSignUpPressed = () => {
+  const onSignUpPressed = async event => 
+  {
     const firstNameError = firstNameValidator(firstName.value)
     const lastNameError = lastNameValidator(lastName.value)
     const emailError = emailValidator(email.value)
     const usernameError = usernameValidator(username.value)
     const passwordError = passwordValidator(password.value)
+    
     if (emailError || usernameError || passwordError || firstNameError || lastNameError) {
       setFirstName({ ...firstName, error: firstNameError })
       setLastName({ ...lastName, error: lastNameError })
@@ -35,11 +38,44 @@ export default function RegisterScreen({ navigation }) {
       setPassword({ ...password, error: passwordError })
       return
     }
-    navigation.reset({
-      index: 0,
-      routes: [{ firstName: 'Dashboard' }],
-    })
-  }
+    else
+    {
+      event.preventDefault();
+       
+      var obj = 
+      {FirstName:firstName.value,
+      LastName:lastName.value,
+      Login:username.value,
+      Password:password.value, 
+      Email:email.value
+      };
+
+      var js = JSON.stringify(obj);
+
+      try
+      {    
+        const response = await fetch('https://foodgram-demo.herokuapp.com/api/register',
+              {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+        var res = JSON.parse(await response.text());
+        if( res.id <= 0 )
+        {
+            setMessage(res.error);
+        }
+        else
+        {
+            var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+            // localStorage.setItem('user_data', JSON.stringify(user));
+            setMessage('');
+            navigation.navigate(LoginScreen);
+        }
+      }
+      catch(e)
+      {
+          console.log(e.toString());
+          return;
+      }    
+    }   
+  };
 
   return (
     <Background>

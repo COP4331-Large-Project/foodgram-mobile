@@ -35,36 +35,36 @@ export default function LoginScreen({ navigation }) {
   const [message, setMessage] = useState('');
 
   const onLoginPressed = async event => 
-    {
-        event.preventDefault();
-        var obj = {login:username.value,password:password.value};
-        var js = JSON.stringify(obj);
-        try
-        {    
-          const response = await fetch('https://foodgram-demo.herokuapp.com/api/login',
-          {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
-            var res = JSON.parse(await response.text());
-            // console.log(res.id);
-            if( res.id <= 0 || res.id == undefined)
-            {
-                setMessage('User/Password combination incorrect');
-            }
-            else
-            {
-                console.log(res.id);
-                var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-                //localStorage.setItem('user_data', JSON.stringify(user));
-                setMessage('SUCCESS');
-                console.log(message);
-                navigation.navigate(Dashboard);
-            }
-        }
-        catch(e)
+  {
+    event.preventDefault();
+    var obj = {login:username.value,password:password.value};
+    var js = JSON.stringify(obj);
+    try
+    {    
+      const response = await fetch('https://foodgram-demo.herokuapp.com/api/login',
+      {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
+        var res = JSON.parse(await response.text());
+        // console.log(res.id);
+        if( res.id <= 0 || res.id == undefined)
         {
-            console.log(e.toString());
-            return;
-        }    
-    };
+            setMessage('User/Password Combination Incorrect');
+        }
+        else
+        {
+            console.log(res.id);
+            var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+            //localStorage.setItem('user_data', JSON.stringify(user));
+            setMessage('SUCCESS');
+            console.log(message);
+            navigation.navigate(Dashboard);
+        }
+    }
+    catch(e)
+    {
+        console.log(e.toString());
+        return;
+    }    
+  };
 
   // const [message, setMessage] = useState('');
 
