@@ -21,6 +21,7 @@ export default function RegisterScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [message, setMessage] = useState('')
 
   const onSignUpPressed = async event => 
   {
@@ -81,6 +82,7 @@ export default function RegisterScreen({ navigation }) {
       <BackButton goBack={navigation.goBack} />
       {/* <Logo /> */}
       <Header>Create Account</Header>
+      <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
       <TextInput
         label="First Name"
         returnKeyType="next"

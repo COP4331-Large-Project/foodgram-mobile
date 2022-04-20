@@ -11,11 +11,13 @@ import { theme } from '../core/theme'
 import { usernameValidator } from '../helpers/usernameValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import Dashboard from './Dashboard'
+import { useTogglePasswordVisibility } from '../helpers/passwordVisibility';
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [message, setMessage] = useState('');
+  const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
 
   const onLoginPressed = async event => 
   {
@@ -78,7 +80,7 @@ export default function LoginScreen({ navigation }) {
         onChangeText={(text) => setPassword({ value: text, error: '' })}
         error={!!password.error}
         errorText={password.error}
-        secureTextEntry
+        secureTextEntry={passwordVisibility}
       />
       <View style={styles.forgotPassword}>
         <TouchableOpacity
