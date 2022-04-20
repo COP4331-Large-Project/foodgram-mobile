@@ -13,7 +13,8 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import Dashboard from './Dashboard'
 import { useTogglePasswordVisibility } from '../helpers/passwordVisibility';
 
-export default function LoginScreen({ navigation }) {
+export default function LoginScreen({ navigation }) 
+{
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [message, setMessage] = useState('');
