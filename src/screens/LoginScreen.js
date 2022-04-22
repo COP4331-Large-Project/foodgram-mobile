@@ -12,13 +12,14 @@ import { usernameValidator } from '../helpers/usernameValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import Dashboard from './Dashboard'
 import { useTogglePasswordVisibility } from '../helpers/passwordVisibility';
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 
 export default function LoginScreen({ navigation }) 
 {
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [message, setMessage] = useState('');
-  const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
+  //const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
 
   const onLoginPressed = async event => 
   {
@@ -62,44 +63,48 @@ export default function LoginScreen({ navigation })
   };
 
   return (
-    <Background>
-      <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
-      <TextInput
-        label="Username"
-        returnKeyType="next"
-        value={username.value}
-        onChangeText={(text) => setUsername({ value: text, error: '' })}
-        error={!!username.error}
-        errorText={username.error}
-      />
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry={passwordVisibility}
-      />
-      <View style={styles.forgotPassword}>
-        <TouchableOpacity
-          onPress={() => navigation.navigate('ResetPasswordScreen')}
-        >
-          <Text style={styles.forgot}>Forgot your password?</Text>
-        </TouchableOpacity>
-      </View>
-      <Button mode="contained" onPress={onLoginPressed}>
-        Login
-      </Button>
-      <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
-          <Text style={styles.link}>Sign up</Text>
-        </TouchableOpacity>
-      </View>
-    </Background>
+    <SafeAreaView style={styles.Safe}>
+      <ScrollView style={styles.Scroll}>
+        <Background>
+          <BackButton goBack={navigation.goBack} />
+          <Logo />
+          <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
+          <TextInput
+            label="Username"
+            returnKeyType="next"
+            value={username.value}
+            onChangeText={(text) => setUsername({ value: text, error: '' })}
+            error={!!username.error}
+            errorText={username.error}
+          />
+          <TextInput
+            label="Password"
+            returnKeyType="done"
+            value={password.value}
+            onChangeText={(text) => setPassword({ value: text, error: '' })}
+            error={!!password.error}
+            errorText={password.error}
+            secureTextEntry
+          />
+          <View style={styles.forgotPassword}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('ResetPasswordScreen')}
+            >
+              <Text style={styles.forgot}>Forgot your password?</Text>
+            </TouchableOpacity>
+          </View>
+          <Button mode="contained" onPress={onLoginPressed}>
+            Login
+          </Button>
+          <View style={styles.row}>
+            <Text>Don’t have an account? </Text>
+            <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+              <Text style={styles.link}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
+        </Background>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -120,5 +125,12 @@ const styles = StyleSheet.create({
   link: {
     fontWeight: 'bold',
     color: theme.colors.primary,
+  },
+  Safe: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  Scroll: {
+    backgroundColor: '#ffffff',
   },
 })

@@ -7,6 +7,7 @@ import TextInput from '../components/TextInput'
 import Button from '../components/Button'
 import { emailValidator } from '../helpers/emailValidator'
 import LoginScreen from './LoginScreen'
+import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
 
 export default function ResetPasswordScreen({ navigation }) 
 {
@@ -55,30 +56,44 @@ export default function ResetPasswordScreen({ navigation })
   }
 
   return (
-    <Background>
-      <BackButton goBack={navigation.goBack} />
-      <Logo />
-      <Header>Restore Password</Header>
-      <TextInput
-        label="E-mail address"
-        returnKeyType="done"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-        description="You will receive email with password reset link."
-      />
-      <Button
-        mode="contained"
-        onPress={sendResetPasswordEmail}
-        style={{ marginTop: 16 }}
-      >
-        Submit
-      </Button>
-    </Background>
+    <SafeAreaView style={styles.Safe}>
+      <ScrollView style={styles.Scroll}>
+        <Background>
+          <BackButton goBack={navigation.goBack} />
+          <Logo />
+          <Header>Restore Password</Header>
+          <TextInput
+            label="E-mail address"
+            returnKeyType="done"
+            value={email.value}
+            onChangeText={(text) => setEmail({ value: text, error: '' })}
+            error={!!email.error}
+            errorText={email.error}
+            autoCapitalize="none"
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+            description="You will receive email with password reset link."
+          />
+          <Button
+            mode="contained"
+            onPress={sendResetPasswordEmail}
+            style={{ marginTop: 16 }}
+          >
+            Submit
+          </Button>
+        </Background>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  Safe: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  Scroll: {
+    backgroundColor: '#ffffff',
+  },
+})

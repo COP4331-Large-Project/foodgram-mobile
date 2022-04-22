@@ -14,6 +14,7 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import { firstNameValidator } from '../helpers/firstNameValidator'
 import { lastNameValidator } from '../helpers/lastNameValidator'
 import LoginScreen from './LoginScreen'
+import { SafeAreaView, ScrollView, StatusBar } from 'react-native'
 
 export default function RegisterScreen({ navigation }) {
   const [firstName, setFirstName] = useState({ value: '', error: '' })
@@ -78,70 +79,74 @@ export default function RegisterScreen({ navigation }) {
   };
 
   return (
-    <Background>
-      <BackButton goBack={navigation.goBack} />
-      {/* <Logo /> */}
-      <Header>Create Account</Header>
-      <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
-      <TextInput
-        label="First Name"
-        returnKeyType="next"
-        value={firstName.value}
-        onChangeText={(text) => setFirstName({ value: text, error: '' })}
-        error={!!firstName.error}
-        errorText={firstName.error}
-      />
-      <TextInput
-        label="Last Name"
-        returnKeyType="next"
-        value={lastName.value}
-        onChangeText={(text) => setLastName({ value: text, error: '' })}
-        error={!!lastName.error}
-        errorText={lastName.error}
-      />
-      <TextInput
-        label="Email"
-        returnKeyType="next"
-        value={email.value}
-        onChangeText={(text) => setEmail({ value: text, error: '' })}
-        error={!!email.error}
-        errorText={email.error}
-        autoCapitalize="none"
-        autoCompleteType="email"
-        textContentType="emailAddress"
-        keyboardType="email-address"
-      />
-      <TextInput
-        label="Username"
-        returnKeyType="next"
-        value={username.value}
-        onChangeText={(text) => setUsername({ value: text, error: '' })}
-        error={!!username.error}
-        errorText={username.error}
-      />
-      <TextInput
-        label="Password"
-        returnKeyType="done"
-        value={password.value}
-        onChangeText={(text) => setPassword({ value: text, error: '' })}
-        error={!!password.error}
-        errorText={password.error}
-        secureTextEntry
-      />
-      <Button
-        mode="contained"
-        onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
-      >
-        Sign Up
-      </Button>
-      <View style={styles.row}>
-        <Text>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
-          <Text style={styles.link}>Login</Text>
-        </TouchableOpacity>
-      </View>
-    </Background>
+    <SafeAreaView style={styles.Safe}>
+      <ScrollView style={styles.Scroll}>
+        <Background>
+          <BackButton goBack={navigation.goBack} />
+          {/* <Logo /> */}
+          <Header>Create Account</Header>
+          <Text style={{marginTop:10, fontSize:15, color:'red'}}>{message}</Text>
+          <TextInput
+            label="First Name"
+            returnKeyType="next"
+            value={firstName.value}
+            onChangeText={(text) => setFirstName({ value: text, error: '' })}
+            error={!!firstName.error}
+            errorText={firstName.error}
+          />
+          <TextInput
+            label="Last Name"
+            returnKeyType="next"
+            value={lastName.value}
+            onChangeText={(text) => setLastName({ value: text, error: '' })}
+            error={!!lastName.error}
+            errorText={lastName.error}
+          />
+          <TextInput
+            label="Email"
+            returnKeyType="next"
+            value={email.value}
+            onChangeText={(text) => setEmail({ value: text, error: '' })}
+            error={!!email.error}
+            errorText={email.error}
+            autoCapitalize="none"
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            keyboardType="email-address"
+          />
+          <TextInput
+            label="Username"
+            returnKeyType="next"
+            value={username.value}
+            onChangeText={(text) => setUsername({ value: text, error: '' })}
+            error={!!username.error}
+            errorText={username.error}
+          />
+          <TextInput
+            label="Password"
+            returnKeyType="done"
+            value={password.value}
+            onChangeText={(text) => setPassword({ value: text, error: '' })}
+            error={!!password.error}
+            errorText={password.error}
+            secureTextEntry
+          />
+          <Button
+            mode="contained"
+            onPress={onSignUpPressed}
+            style={{ marginTop: 24 }}
+          >
+            Sign Up
+          </Button>
+          <View style={styles.row}>
+            <Text>Already have an account? </Text>
+            <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
+              <Text style={styles.link}>Login</Text>
+            </TouchableOpacity>
+          </View>
+        </Background>
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
@@ -154,4 +159,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: theme.colors.primary,
   },
+  Safe: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  Scroll: {
+    backgroundColor: '#ffffff',
+  }
 })
