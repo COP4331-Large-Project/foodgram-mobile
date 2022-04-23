@@ -3,7 +3,6 @@ import { Provider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { theme } from './src/core/theme';
 import Stacks from './src/navigation/stacks';
-import Tabs from './src/navigation/tabs';
 
 function App () {
   return (
