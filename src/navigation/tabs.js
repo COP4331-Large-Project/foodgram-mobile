@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { theme } from '../core/theme';
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native-web';
 import { Ionicons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { 
     Dashboard,
@@ -12,6 +13,27 @@ import {
 } from '../screens'
 
 const Tab = createBottomTabNavigator();
+// const CustomTabBarButton = ({children, onPress}) => (
+//     <TouchableOpacity 
+//         style={{
+//             top: -30,
+//             justifyContent: 'center',
+//             alignItems: 'center',
+//             ...styles.shadow
+//         }}
+//         onPress={onPress}
+//     >
+//         <View style={{
+//             width: 70,
+//             height: 70,
+//             borderRadius: 35,
+//             backgroundColor: 'red'
+//         }}>
+//             {children}
+//         </View>
+//     </TouchableOpacity>
+
+// );
 
 // component
 const Tabs = () => {
@@ -21,35 +43,36 @@ const Tabs = () => {
                 tabBarShowLabel: false,
                 tabBarStyle: {
                     position: 'absolute',
-                    bottom: 40,
+                    bottom: 25,
                     left: 20,
                     right: 20,
-                    marginHorizontal: 20,
+                    elevation: 5,
+                    // marginHorizontal: 10,
                     backgroundColor: 'white',
-                    borderRadius: 10,
-                    height: 60,
-                    shadowColor: '#000',
-                    shadowOpacity: 0.06,
-                    shadowOffset: {
-                        width: 10,
-                        height: 10
-                    },
-                    paddingHorizontal: 20,
+                    borderRadius: 15,
+                    height: 75,
+                    ...styles.shadow
+                    // shadowColor: '#000',
+                    // shadowOpacity: 0.25,
+                    // shadowOffset: {
+                    //     width: 10,
+                    //     height: 10
+                    // },
+                    // paddingHorizontal: 20,
                 }
             }}
         >
-            {/* <Tab.Screen name='Home' component={Dashboard} /> */}
             <Tab.Screen 
                 name='Home' 
                 component={Dashboard} 
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
-                            <Ionicons 
-                                name="ios-home-sharp" 
-                                size={22} 
+                            <FontAwesome 
+                                name="home" 
+                                size={25} 
                                 color={focused ? theme.colors.terciary : theme.colors.primary}
-                                style={{alignItems: 'center', justifyContent: 'center', top: 10}}
+                                style={{alignItems: 'center', justifyContent: 'center', top: 15}}
                             />
                         );
                     }
@@ -61,11 +84,11 @@ const Tabs = () => {
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
-                            <Ionicons 
-                                name="list-circle-sharp" 
-                                size={24} 
+                            <FontAwesome 
+                                name="list-alt" 
+                                size={25} 
                                 color={focused ? theme.colors.terciary : theme.colors.primary}
-                                style={{alignItems: 'center', justifyContent: 'center', top: 10}}
+                                style={{alignItems: 'center', justifyContent: 'center', top: 15}}
                             />
                         );
                     }
@@ -79,12 +102,17 @@ const Tabs = () => {
                         return (
                             <Ionicons 
                                 name="add-circle" 
-                                size={32} 
+                                size={48} 
                                 color={focused ? theme.colors.terciary : theme.colors.primary}
-                                style={{alignItems: 'center', justifyContent: 'center', top: 10}}
+                                style={{
+                                    top: 10,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    // ...styles.shadow
+                                }}
                             />
                         );
-                    }
+                    },
                 }} 
             />
             <Tab.Screen 
@@ -93,11 +121,11 @@ const Tabs = () => {
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
-                            <Ionicons 
-                                name="heart-circle-sharp" 
-                                size={24} 
+                            <FontAwesome 
+                                name="heart" 
+                                size={25} 
                                 color={focused ? theme.colors.terciary : theme.colors.primary}
-                                style={{alignItems: 'center', justifyContent: 'center', top: 10}}
+                                style={{alignItems: 'center', justifyContent: 'center', top: 15}}
                             />
                         );
                     }
@@ -109,11 +137,11 @@ const Tabs = () => {
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
-                            <Ionicons 
-                                name="settings-sharp" 
-                                size={22} 
+                            <FontAwesome 
+                                name="user" 
+                                size={25} 
                                 color={focused ? theme.colors.terciary : theme.colors.primary}
-                                style={{alignItems: 'center', justifyContent: 'center', top: 10}}
+                                style={{alignItems: 'center', justifyContent: 'center', top: 15}}
                             />
                         );
                     }
@@ -124,6 +152,17 @@ const Tabs = () => {
 }
 
 const styles = StyleSheet.create({
+    shadow: {
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 0,
+            height: 10,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.5,
+        elevation: 5,
+
+    },
     icon: {
       position: 'absolute',
       top: 20,

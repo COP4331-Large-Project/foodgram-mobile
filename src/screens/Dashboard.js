@@ -8,27 +8,40 @@ import { Text } from 'react-native-paper'
 import List from "../components/List";
 import SearchBar from "../components/SearchBar";
 import { useState } from 'react';
-import { SafeAreaView, ScrollView, StatusBar, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { theme } from '../core/theme'
 
 export default function Dashboard({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
 
   return (
+    // <SafeAreaView style={styles.Safe}>
+    //   <ScrollView style={styles.Scroll}>
     <SafeAreaView style={styles.Safe}>
-      <ScrollView style={styles.Scroll}>
-        <Background>
-          <Header>Dashboard</Header>
-          <SearchBar
+      <Header>
+        <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
+            <MaterialIcons 
+              name="logout" 
+              size={24} 
+              color={theme.colors.terciary} 
+              style={{alignItems: 'center', justifyContent: 'center', top: 10, right: -350}}
+            />
+        </TouchableOpacity>
+      </Header>
+      <SearchBar
             searchPhrase={searchPhrase}
             setSearchPhrase={setSearchPhrase}
             clicked={clicked}
             setClicked={setClicked}
-          />
+      />
+      <ScrollView>
+        {/* <Background> */}
           <Paragraph>
             Recipe Stories will pop up here.
           </Paragraph>
-          <Button
+          {/* <Button
             mode="outlined"
             onPress={() =>
               navigation.reset({
@@ -38,8 +51,8 @@ export default function Dashboard({ navigation }) {
             }
           >
             Logout
-          </Button>
-        </Background>
+          </Button> */}
+        {/* </Background> */}
       </ScrollView>
     </SafeAreaView>
   )
@@ -50,7 +63,7 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
-  Scroll: {
-    backgroundColor: '#ffffff',
-  },
+  // Scroll: {
+  //   backgroundColor: '#ffffff',
+  // },
 })

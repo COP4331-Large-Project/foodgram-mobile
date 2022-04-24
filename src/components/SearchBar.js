@@ -56,11 +56,12 @@ const SearchBar = ({clicked, searchPhrase, setSearchPhrase, setClicked}) => {
   // styles
   const styles = StyleSheet.create({
     container: {
-      margin: 15,
-      justifyContent: "flex-start",
+      // margin: 15,
+      justifyContent: "center",
       alignItems: "center",
       flexDirection: "row",
-      width: "90%",
+      marginHorizontal: 10,
+      width: "95%",
   
     },
     searchBar__unclicked: {
