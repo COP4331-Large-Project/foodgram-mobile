@@ -3,7 +3,7 @@ import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
-import Button from '../components/Button'
+//import Button from '../components/Button'
 import { Text } from 'react-native-paper'
 import List from "../components/List";
 import SearchBar from "../components/SearchBar";
@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
+// import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
+import RecipeCard from '../components/RecipeCard'
 
 export default function Dashboard({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
@@ -37,22 +39,11 @@ export default function Dashboard({ navigation }) {
             setClicked={setClicked}
       />
       <ScrollView>
-        {/* <Background> */}
-          <Paragraph>
-            Recipe Stories will pop up here.
-          </Paragraph>
-          {/* <Button
-            mode="outlined"
-            onPress={() =>
-              navigation.reset({
-                index: 0,
-                routes: [{ name: 'StartScreen' }],
-              })
-            }
-          >
-            Logout
-          </Button> */}
-        {/* </Background> */}
+        <RecipeCard
+          title="Paella"
+          description="This impressive paella is a perfect party dish and a fun meal to cook together with your guests." 
+          image="../assets/paella.jpg"
+        />
       </ScrollView>
     </SafeAreaView>
   )
