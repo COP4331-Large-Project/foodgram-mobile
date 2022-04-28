@@ -13,27 +13,6 @@ import {
 } from '../screens'
 
 const Tab = createBottomTabNavigator();
-// const CustomTabBarButton = ({children, onPress}) => (
-//     <TouchableOpacity 
-//         style={{
-//             top: -30,
-//             justifyContent: 'center',
-//             alignItems: 'center',
-//             ...styles.shadow
-//         }}
-//         onPress={onPress}
-//     >
-//         <View style={{
-//             width: 70,
-//             height: 70,
-//             borderRadius: 35,
-//             backgroundColor: 'red'
-//         }}>
-//             {children}
-//         </View>
-//     </TouchableOpacity>
-
-// );
 
 // component
 const Tabs = () => {
@@ -47,18 +26,10 @@ const Tabs = () => {
                     left: 20,
                     right: 20,
                     elevation: 5,
-                    // marginHorizontal: 10,
                     backgroundColor: 'white',
                     borderRadius: 15,
                     height: 75,
                     ...styles.shadow
-                    // shadowColor: '#000',
-                    // shadowOpacity: 0.25,
-                    // shadowOffset: {
-                    //     width: 10,
-                    //     height: 10
-                    // },
-                    // paddingHorizontal: 20,
                 }
             }}
         >
