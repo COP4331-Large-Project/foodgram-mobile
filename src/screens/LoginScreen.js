@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, FlatList, StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -13,12 +13,23 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import Dashboard from './Dashboard'
 import { useTogglePasswordVisibility } from '../helpers/passwordVisibility';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const storeData = async (value) => {
+  try {
+    await AsyncStorage.setItem('user_data', JSON.stringify(value))
+  } catch (e) {
+    console.log(e.toString());
+    return;
+  }
+}
 
 export default function LoginScreen({ navigation }) 
 {
   const [username, setUsername] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
   const [message, setMessage] = useState('');
+
   //const { passwordVisibility, rightIcon, handlePasswordVisibility } = useTogglePasswordVisibility();
 
   const onLoginPressed = async event => 
@@ -40,21 +51,20 @@ export default function LoginScreen({ navigation })
       const response = await fetch('https://foodgram-demo.herokuapp.com/api/login',
       {method:'POST',body:js,headers:{'Content-Type': 'application/json'}});
         var res = JSON.parse(await response.text());
-        // console.log(res.id);
+      
         if( res.id <= 0 || res.id == undefined)
         {
             setMessage('User/Password Combination Incorrect');
         }
         else
         {
-            console.log(res.id);
-            var user = {firstName:res.firstName,lastName:res.lastName,id:res.id}
-            //localStorage.setItem('user_data', JSON.stringify(user));
+            var data = {firstName:res.firstName,lastName:res.lastName,id:res.id}
+            storeData(data);
             setMessage('SUCCESS');
-            console.log(message);
             navigation.navigate(Dashboard);
         }
     }
+
     catch(e)
     {
         console.log(e.toString());

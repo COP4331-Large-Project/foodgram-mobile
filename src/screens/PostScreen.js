@@ -4,8 +4,6 @@ import TextInput from '../components/TextInput';
 import { useState } from 'react';
 import Buttonn from '../components/Button';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import DocumentPicker from 'react-native-document-picker';
-import ImagePicker from 'react-native-image-picker';
 import * as PhotoPicker from 'expo-image-picker';
 
 export default function PostScreen({ navigation }) {
