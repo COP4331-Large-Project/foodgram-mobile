@@ -12,13 +12,36 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
 import { recipeCards } from '../../RecipeCardsData'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
+const getData = async () => {
+  try {
+    const data = await AsyncStorage.getItem('user_data');
+    console.log("data: " + data);
+    var user = JSON.parse(data);
+    console.log("userId: " + user.id);
+    return user.id;
 
-export default function Dashboard({ navigation }) {
+  } catch(e) {
+    console.log(e.toString());
+    return -1;
+  }
+}
+
+
+export default function Dashboard ({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [recipeCards, setRecipeCards] = useState([]);
+
+  const user = getData();
+  console.log(JSON.stringify(user));
+
+
+  // console.log(userId);
+  // console.log(firstName);
+  // console.log(lastName);
 
   // console.log(recipeCards);
   // useEffect(() => {
