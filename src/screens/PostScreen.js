@@ -13,7 +13,7 @@ export default function PostScreen({ navigation }) {
     const [instructions, setInstructions] = useState()
     const [category, setCategory] = useState()
     const [file, setFile] = useState(null)
-    var userID = "null"
+    var userID = "625f20e9664beec551c15815"
     //const [errorValidation, setErrorValidation] = useState("");
     const [message, setMessage] = useState("");
 
@@ -22,7 +22,7 @@ export default function PostScreen({ navigation }) {
     
         // console.log(userID);
         // console.log("name->", name);
-        // console.log("file->", file);
+         console.log("file->", file);
         // console.log("instructions->", instructions);
         // console.log("instructions->", ingredients);
         // console.log("category->", category);
@@ -46,15 +46,16 @@ export default function PostScreen({ navigation }) {
           const response = await fetch('https://foodgram-demo.herokuapp.com/api/upload/', {
             method: "POST",
             body: formData,
-            //headers: { "Content-Type": "multipart/form-data" }
+            headers: { "Content-Type": "multipart/form-data" }
           });
     
           var res = JSON.parse(await response.text());
-          console.log(res.name)
+          //console.log(res.name)
           console.log("Successfully added the recipe!");
          
         } catch (e) {
           console.log("error->", e.toString());
+          setMessage(e.toString());
           return;
         }
       };
@@ -63,13 +64,14 @@ export default function PostScreen({ navigation }) {
         const permissionResult = await PhotoPicker.requestMediaLibraryPermissionsAsync();
 
         if (permissionResult.granted === false) {
-            alert("You've refused to allow this appp to access your photos!");
+            alert("You've refused to allow this app to access your photos!");
             return;
         }
 
-        const result = await PhotoPicker.launchImageLibraryAsync();
+        const result = await PhotoPicker.launchImageLibraryAsync({allowsEditing:true});
 
         // Explore the result
+        result.uri = result.uri.replace('file://', '')
         console.log(result);
 
         if (!result.cancelled) {
@@ -82,13 +84,14 @@ export default function PostScreen({ navigation }) {
         const permissionResult = await PhotoPicker.requestCameraPermissionsAsync();
 
         if (permissionResult.granted === false) {
-            alert("You've refused to allow this appp to access your photos!");
+            alert("You've refused to allow this app to access your photos!");
             return;
         }
 
-        const result = await PhotoPicker.launchCameraAsync();
+        const result = await PhotoPicker.launchCameraAsync({allowsEditing:true});
 
         // Explore the result
+        result.uri = result.uri.replace('file://', '')
         console.log(result);
 
         if (!result.cancelled) {
@@ -119,6 +122,7 @@ export default function PostScreen({ navigation }) {
                 <TouchableOpacity onPress={HandleTakeImage} style={styles.image}>
                     <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Take a photo</Text>
                 </TouchableOpacity>
+                {/* {file && <Image source={{ uri: file }} style={{ width: 200, height: 200, justifyContent:'center', alignContent:'center', left: 100 }} />} */}
                 {/* <Image source={{uri: file.uri}}/> */}
                 <TextInput
                     label="Ingredients"
