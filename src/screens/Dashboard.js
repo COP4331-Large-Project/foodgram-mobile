@@ -35,8 +35,6 @@ export default function Dashboard ({ navigation }) {
   const [clicked, setClicked] = useState(false);
   const [recipeCards, setRecipeCards] = useState([]);
 
-//  const user = getData();
-//console.log(JSON.stringify(user));
   ;(async () => {
     const user = await getData()
     console.log(user)
