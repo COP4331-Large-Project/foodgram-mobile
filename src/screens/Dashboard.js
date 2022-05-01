@@ -21,7 +21,7 @@ const getData = async () => {
     console.log("data: " + data);
     var user = JSON.parse(data);
     console.log("userId: " + user.id);
-    return user.id;
+    return user;
 
   } catch(e) {
     console.log(e.toString());
@@ -34,17 +34,16 @@ export default function Dashboard ({ navigation }) {
   const [searchPhrase, setSearchPhrase] = useState("");
   const [clicked, setClicked] = useState(false);
   const [recipeCards, setRecipeCards] = useState([]);
+  var user;
 
-//  const user = getData();
-//console.log(JSON.stringify(user));
   ;(async () => {
-    const user = await getData()
-    console.log(user)
-  })()
+    user = await getData();
+    console.log(user);
 
-  // console.log(userId);
-  // console.log(firstName);
-  // console.log(lastName);
+
+    // call api
+    
+  })()
 
   // console.log(recipeCards);
   // useEffect(() => {
@@ -58,6 +57,7 @@ export default function Dashboard ({ navigation }) {
     //   <ScrollView style={styles.Scroll}>
     <SafeAreaView style={styles.Safe}>
       <Header>
+        Welcome
         <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
             <MaterialIcons 
               name="logout" 
