@@ -99,6 +99,8 @@ export default function Dashboard ({ navigation }) {
     //   <ScrollView style={styles.Scroll}>
     <SafeAreaView style={styles.Safe}>
       {/* <Header>
+      <Header>
+        Welcome
         <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
             <MaterialIcons 
               name="logout" 
