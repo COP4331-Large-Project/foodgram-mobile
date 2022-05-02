@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
     height: 40,
     margin: 10,
     backgroundColor: theme.colors.surface,
-    marginBottom: -15
+    marginTop: -10,
+    marginBottom: -20
   },
   description: {
     fontSize: 13,

@@ -15,6 +15,7 @@ export default function RecipeCard (props, focused) {
 		<Card 
 			style={{
 			backgroundColor: theme.colors.surface,
+			
 			margin: 10,
 			marginTop: 14,
 			borderRadius: 30,

@@ -71,11 +71,6 @@ export default function Dashboard ({ navigation, focused }) {
   };
 
   return (
-
-    // <ImageBackground
-    //   source={require('../assets/background.png')}
-    //   style={styles.background}
-    // >
       <SafeAreaView style={styles.Safe}>
         <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
           <MaterialIcons 
@@ -93,7 +88,7 @@ export default function Dashboard ({ navigation, focused }) {
           onChangeText={(text) => loadFeed(text)}
         />
         
-        <ScrollView>
+        <ScrollView style={styles.Scroll}>
           {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
             return (
               <RecipeCard 
@@ -110,8 +105,6 @@ export default function Dashboard ({ navigation, focused }) {
           }) : null }
         </ScrollView>
     </SafeAreaView>
-
-    // {/* </ImageBackground> */}
 
   )
 }
@@ -130,11 +123,8 @@ const styles = StyleSheet.create({
   },
 
   Scroll: {
-    backgroundColor: '#F8F8F8',
+    // backgroundColor: '#C3B1E1',
+    backgroundColor: theme.colors.surface,
   },
 
-  // background: {
-  //   flex: 1,
-  //   width: '100%',
-  // }
 })
