@@ -13,7 +13,7 @@ import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
 import { recipeCards } from '../../RecipeCardsData'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import SearchInput from '../components/SearchInput';
 
 const getData = async () => {
   try {
@@ -125,11 +125,13 @@ export default function Dashboard ({ navigation }) {
             setClicked={setClicked}
             onChange={loadFeed(query)}
       /> */}
-      <TextInput 
-        placeholder="search" 
-        onChangeText={(val) => loadFeed(val)}
-        clearButtonMode='while-editing'
+
+      <SearchInput
+        label="Search"
+        onChangeText={(text) => loadFeed(text)}
       />
+      
+
       <ScrollView>
          {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
            return (
@@ -151,7 +153,8 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: StatusBar.currentHeight,
   },
-  // Scroll: {
-  //   backgroundColor: '#ffffff',
-  // },
+
+  Scroll: {
+    backgroundColor: '#ffffff',
+  },
 })
