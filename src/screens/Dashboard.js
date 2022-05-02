@@ -1,19 +1,13 @@
 import React from 'react'
-import Background from '../components/Background'
-import Logo from '../components/Logo'
 import Header from '../components/Header'
-import Paragraph from '../components/Paragraph'
-import { Text } from 'react-native-paper'
-import List from "../components/List";
-import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
+import { ImageBackground, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
-import { recipeCards } from '../../RecipeCardsData'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchInput from '../components/SearchInput';
+import Background from '../components/Background';
 
 const getData = async () => {
   try {
@@ -39,7 +33,7 @@ const setResult = async (value) => {
 }
 
 
-export default function Dashboard ({ navigation }) {
+export default function Dashboard ({ navigation, focused }) {
   const [query, setQuery] = useState("");
   const [clicked, setClicked] = useState(false);
   const [userSession, setUserSession] = useState()
@@ -59,9 +53,8 @@ export default function Dashboard ({ navigation }) {
 
   const loadFeed = async (query) => {
     var obj = { search: query };
-    //console.log("AQUI-->" + query)
     var js = JSON.stringify(obj);
-    // var js = {"search":query};
+    
     try {
       const response = await fetch('https://foodgram-demo.herokuapp.com/api/search/', {
         method: "POST",
@@ -69,92 +62,76 @@ export default function Dashboard ({ navigation }) {
         headers: { "Content-Type": "application/json" },
       });
       var res = JSON.parse(await response.text());
-      //console.log({res})
+  
       setRecipeCards(res)
-      //console.log({recipeCards})
-
-      // setRecipeCards({
-      //   ...recipeCards,
-      //   data: res,
-      // });
-      // temp=res[0]._id
-      // console.log(res)
-      // setFeed(res);
-      //localStorage.setItem("feed", JSON.stringify(res));
-      //setResult(JSON.stringify(res));
       
     } catch (e) {
       console.log(e.toString());
     }
-
-    // setFeed(query)
   };
 
-  // console.log("MIRA MALDITO" + userSession);
-  // console.log(userId);
-  // console.log(firstName);
-  // console.log(lastName);
-
-  // console.log(recipeCards);
-  // useEffect(() => {
-  //   const updateFeed = setInterval(() => {
-  //     setRecipeCards(fetch()))
-  //   }, 100)
-  // }, []);
-
   return (
-    // <SafeAreaView style={styles.Safe}>
-    //   <ScrollView style={styles.Scroll}>
-    <SafeAreaView style={styles.Safe}>
-      {/* <Header>
-      <Header>
-        Welcome
+
+    <ImageBackground
+      source={require('../assets/background.png')}
+      style={styles.background}
+    >
+      <SafeAreaView style={styles.Safe}>
         <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
-            <MaterialIcons 
-              name="logout" 
-              size={24} 
-              color={theme.colors.terciary} 
-              style={{alignItems: 'center', justifyContent: 'center', top: 10, right: -350}}
-            />
+          <MaterialIcons 
+            name="logout" 
+            size={24} 
+            color={focused ? theme.colors.terciary : theme.colors.primary}
+            style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}}
+          />
         </TouchableOpacity>
-      </Header> */}
-      {/* <SearchBar
-            searchPhrase={query}
-            setSearchPhrase={e => setQuery(e.target.value)}
-            clicked={clicked}
-            setClicked={setClicked}
-            onChange={loadFeed(query)}
-      /> */}
-
-      <SearchInput
-        label="Search"
-        onChangeText={(text) => loadFeed(text)}
-      />
-      
-
-      <ScrollView>
-         {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
-           return (
-             <RecipeCard key={recipeCard._id} image={{uri: recipeCard.imagePath}} title={recipeCard.name} description={recipeCard.instructions} {...recipeCard}/>
-          );
-        }) : null }
-        {/* <RecipeCard
-          title="Paella"
-          description="This impressive paella is a perfect party dish and a fun meal to cook together with your guests." 
-          image={require('../assets/paella.jpg')}
-        /> */}
-      </ScrollView>
+        <Header>
+          Welcome
+        </Header>
+        <SearchInput
+          label="Search"
+          onChangeText={(text) => loadFeed(text)}
+        />
+        
+        <ScrollView>
+          {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
+            return (
+              <RecipeCard 
+                key={recipeCard._id} 
+                image={{uri: recipeCard.imagePath}} 
+                title={recipeCard.name} 
+                description={recipeCard.instructions} 
+                {...recipeCard}
+              />
+            );
+          }) : null }
+        </ScrollView>
     </SafeAreaView>
+
+    </ImageBackground>
+
   )
 }
 
 const styles = StyleSheet.create({
   Safe: {
     flex: 1,
+    padding: 20,
+    width: '100%',
+    maxWidth: 350,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
+    backgroundColor: theme.colors.surface,
   },
 
   Scroll: {
     backgroundColor: '#ffffff',
   },
+
+  background: {
+    flex: 1,
+    width: '100%',
+  }
 })
