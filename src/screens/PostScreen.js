@@ -5,6 +5,22 @@ import { useState } from 'react';
 import Buttonn from '../components/Button';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import * as PhotoPicker from 'expo-image-picker';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const getData = async () => {
+    try {
+      const data = await AsyncStorage.getItem('user_data');
+      //console.log("data: " + data);
+      var user = JSON.parse(data);
+      //console.log("userId: " + user.id);
+      return user.id;
+  
+    } catch(e) {
+      console.log(e.toString());
+      return -1;
+    }
+  }
 
 export default function PostScreen({ navigation }) {
 
@@ -13,9 +29,15 @@ export default function PostScreen({ navigation }) {
     const [instructions, setInstructions] = useState()
     const [category, setCategory] = useState()
     const [file, setFile] = useState(null)
-    var userID = "625f20e9664beec551c15815"
     //const [errorValidation, setErrorValidation] = useState("");
     const [message, setMessage] = useState("");
+
+    const [userId, setUserId] = useState()
+
+    ;(async () => {
+        const data = await getData();
+        setUserId(data);
+    })()
 
     const PostRecipe = async (event) => {
         event.preventDefault();
@@ -27,18 +49,20 @@ export default function PostScreen({ navigation }) {
         // console.log("instructions->", ingredients);
         // console.log("category->", category);
     
-        if(!file || name === "" || instructions === "" || ingredients === "") {
-          setMessage("Please fill all entries to post a recipe");
-          return;
-        }
+        // if(!file || name === "" || instructions === "" || ingredients === "") {
+        //   setMessage("Please fill all entries to post a recipe");
+        //   return;
+        // }
     
         var formData = new FormData();
-        formData.append("file", file);
+        formData.append("file", file.uri);
         formData.append("name", name);
-        formData.append("userId", userID);
+        formData.append("userId", userId);
         formData.append("ingredients", ingredients);
         formData.append("instructions", instructions);
         formData.append("category", category);
+
+        //const formData = JSON.stringify({file, name, userId, ingredients, instructions, category})
 
         console.log(formData)
     
@@ -46,15 +70,23 @@ export default function PostScreen({ navigation }) {
           const response = await fetch('https://foodgram-demo.herokuapp.com/api/upload/', {
             method: "POST",
             body: formData,
-            headers: { "Content-Type": "multipart/form-data" }
+            //headers: { "Content-Type": "multipart/form-data" }
           });
-    
+
+            // const response = await axios.post('https://foodgram-demo.herokuapp.com/api/upload/', formData, {
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     }
+            // })
+          var result = await response.text()
+          console.log({result})
           var res = JSON.parse(await response.text());
           //console.log(res.name)
           console.log("Successfully added the recipe!");
          
         } catch (e) {
-          console.log("error->", e.toString());
+          //console.log("error->", e.toString());
+          console.log(e)
           setMessage(e.toString());
           return;
         }
@@ -70,12 +102,13 @@ export default function PostScreen({ navigation }) {
 
         const result = await PhotoPicker.launchImageLibraryAsync({allowsEditing:true});
 
+        //console.log({result});
         // Explore the result
         result.uri = result.uri.replace('file://', '')
-        console.log(result);
+        console.log({result});
 
         if (!result.cancelled) {
-            setFile(result.uri);
+            setFile(result);
             console.log(result.uri);
         }
     }
