@@ -9,12 +9,12 @@ export default function SettingsScreen({ navigation }) {
                    alignItems: 'center' }}>
         <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
             <Text style={{color: theme.colors.terciary, fontWeight: 'bold', fontSize: 70, lineHeight: 70,}}>Logout</Text>
-            {/* <MaterialIcons 
+            <MaterialIcons 
               name="logout" 
               size={24} 
               color={theme.colors.terciary} 
               style={{alignItems: 'center', justifyContent: 'center'}}
-            /> */}
+            />
         </TouchableOpacity>
         </View>
     );
