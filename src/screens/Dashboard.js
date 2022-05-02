@@ -1,13 +1,13 @@
 import React from 'react'
 import Header from '../components/Header'
 import { useState, useEffect } from 'react';
-import { ImageBackground, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
+import { Button, ImageBackground, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import SearchInput from '../components/SearchInput';
-import Background from '../components/Background';
+
 
 const getData = async () => {
   try {
@@ -72,12 +72,12 @@ export default function Dashboard ({ navigation, focused }) {
 
   return (
 
-    <ImageBackground
-      source={require('../assets/background.png')}
-      style={styles.background}
-    >
+    // <ImageBackground
+    //   source={require('../assets/background.png')}
+    //   style={styles.background}
+    // >
       <SafeAreaView style={styles.Safe}>
-        <TouchableOpacity onPress={() => navigation.replace('StartScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
           <MaterialIcons 
             name="logout" 
             size={24} 
@@ -97,6 +97,9 @@ export default function Dashboard ({ navigation, focused }) {
           {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
             return (
               <RecipeCard 
+                onPress={() => navigation.navigate('DetailsScreen', {
+                  recipeId: recipeCard._id,
+                })}
                 key={recipeCard._id} 
                 image={{uri: recipeCard.imagePath}} 
                 title={recipeCard.name} 
@@ -108,7 +111,7 @@ export default function Dashboard ({ navigation, focused }) {
         </ScrollView>
     </SafeAreaView>
 
-    </ImageBackground>
+    // {/* </ImageBackground> */}
 
   )
 }
@@ -118,7 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     width: '100%',
-    maxWidth: 350,
+    maxWidth: 390,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -127,11 +130,11 @@ const styles = StyleSheet.create({
   },
 
   Scroll: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#F8F8F8',
   },
 
-  background: {
-    flex: 1,
-    width: '100%',
-  }
+  // background: {
+  //   flex: 1,
+  //   width: '100%',
+  // }
 })

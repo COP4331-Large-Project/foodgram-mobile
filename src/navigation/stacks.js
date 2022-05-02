@@ -5,6 +5,7 @@ import {
     LoginScreen,
     RegisterScreen,
     ResetPasswordScreen,
+    DetailsScreen,
     Dashboard,
   } from '../screens';
 
@@ -24,6 +25,7 @@ const Stacks = () => {
             <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
             <Stack.Screen name="Dashboard" component={Tabs} />
             <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+            <Stack.Screen name='DetailsScreen' component={DetailsScreen} />
         </Stack.Navigator>
     )
 }

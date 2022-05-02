@@ -1,32 +1,60 @@
 import * as React from 'react';
-import { Image } from 'react-native';
-import { CheckBox } from 'react-native';
-import { 
-    Avatar, 
+import { TouchableOpacity, Text } from 'react-native';
+import { theme } from '../core/theme'
+import { FontAwesome } from '@expo/vector-icons';
+import {  
     Button, 
     Card, 
     Title, 
     Paragraph, 
-    Checkbox
 } from 'react-native-paper';
 
-// const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+export default function RecipeCard (props, focused) {
 
-//let path = './public/images'
-const RecipeCard = (props) => (
-  <Card>
-    {/* <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} /> */}
-    <Card.Content>
-      <Title>{props.title}</Title>
-      <Paragraph>{props.description}</Paragraph>
-    </Card.Content>
-    <Card.Cover source={props.image}/>
-    <Card.Actions>
-        <Button>Cancel</Button>
-        <Button>Ok</Button>
-    </Card.Actions>
-  </Card>
-);
+	return (
+		<Card 
+			style={{
+			backgroundColor: theme.colors.surface,
+			margin: 10,
+			marginTop: 14,
+			borderRadius: 30,
+			display: "flex",
+			flexDirection: "column",
+		}}
+		
+		>
+		{/* <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} /> */}
+			<Card.Content>
+			<Title>{props.title}</Title>
+			<Paragraph>{props.description}</Paragraph>
+			</Card.Content>
+			<Card.Cover source={props.image}/>
+			<Card.Actions>
+				<TouchableOpacity>
+					<FontAwesome 
+						style={{
+							alignItems: 'center',
+							justifyContent: 'center',
+							right: -5,
+						}}
+						name="heart" 
+						size={20} 
+						color={focused ? "#D3D3D3" : theme.colors.terciary}
+					// style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}} 
+					/>
+				</TouchableOpacity>
+				<Button style={{
+						alignItems: 'center',
+						justifyContent: 'center',
+						right: -10,
+					}}
+					mode="text" 
+					onPress={props.onPress}
+				>
+					Details
+				</Button>
+			</Card.Actions>
+	  </Card>
 
-
-export default RecipeCard;
+	)
+}

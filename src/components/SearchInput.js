@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    margin: 0,
+    margin: 10,
     backgroundColor: theme.colors.surface,
     marginBottom: -15
   },
