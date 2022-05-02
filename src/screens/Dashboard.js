@@ -7,7 +7,7 @@ import { Text } from 'react-native-paper'
 import List from "../components/List";
 import SearchBar from "../components/SearchBar";
 import { useState, useEffect } from 'react';
-import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet } from 'react-native';
+import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
@@ -42,9 +42,10 @@ const setResult = async (value) => {
 export default function Dashboard ({ navigation }) {
   const [query, setQuery] = useState("");
   const [clicked, setClicked] = useState(false);
-  const [recipeCards, setRecipeCards] = useState([]);
   const [userSession, setUserSession] = useState()
   const [feed, setFeed] = useState([]);
+
+  const [recipeCards, setRecipeCards] = useState([]);
 
   ;(async () => {
     const user = await getData()
@@ -58,7 +59,7 @@ export default function Dashboard ({ navigation }) {
 
   const loadFeed = async (query) => {
     var obj = { search: query };
-    console.log("AQUI-->" + query)
+    //console.log("AQUI-->" + query)
     var js = JSON.stringify(obj);
     // var js = {"search":query};
     try {
@@ -68,13 +69,20 @@ export default function Dashboard ({ navigation }) {
         headers: { "Content-Type": "application/json" },
       });
       var res = JSON.parse(await response.text());
+      //console.log({res})
+      setRecipeCards(res)
+      //console.log({recipeCards})
 
+      // setRecipeCards({
+      //   ...recipeCards,
+      //   data: res,
+      // });
       // temp=res[0]._id
       // console.log(res)
       // setFeed(res);
       //localStorage.setItem("feed", JSON.stringify(res));
-      setResult(JSON.stringify(res));
-      console.log(res)
+      //setResult(JSON.stringify(res));
+      
     } catch (e) {
       console.log(e.toString());
     }
@@ -110,24 +118,29 @@ export default function Dashboard ({ navigation }) {
             />
         </TouchableOpacity>
       </Header> */}
-      <SearchBar
+      {/* <SearchBar
             searchPhrase={query}
-            setSearchPhrase={setQuery}
+            setSearchPhrase={e => setQuery(e.target.value)}
             clicked={clicked}
             setClicked={setClicked}
             onChange={loadFeed(query)}
+      /> */}
+      <TextInput 
+        placeholder="search" 
+        onChangeText={(val) => loadFeed(val)}
+        clearButtonMode='while-editing'
       />
       <ScrollView>
-         {/* {recipeCards.map((recipeCard, i) => {
+         {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
            return (
-             <RecipeCard {...recipeCard}/>
+             <RecipeCard key={recipeCard._id} image={{uri: recipeCard.imagePath}} title={recipeCard.name} description={recipeCard.instructions} {...recipeCard}/>
           );
-        })} */}
-        <RecipeCard
+        }) : null }
+        {/* <RecipeCard
           title="Paella"
           description="This impressive paella is a perfect party dish and a fun meal to cook together with your guests." 
           image={require('../assets/paella.jpg')}
-        />
+        /> */}
       </ScrollView>
     </SafeAreaView>
   )
