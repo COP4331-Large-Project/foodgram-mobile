@@ -48,7 +48,7 @@ export default function Dashboard ({ navigation, focused }) {
   })()
 
   useEffect(() => {
-    console.log("dddddddddddddddddddddddddd");
+    //console.log("dddddddddddddddddddddddddd");
     loadFeed("");
   }, [recipeCards]);
 

@@ -50,7 +50,7 @@ export default function PostScreen({ navigation }) {
 
         // console.log(userID);
         // console.log("name->", name);
-         console.log("file->", file);
+        // console.log("file->", file);
         // console.log("instructions->", instructions);
         // console.log("instructions->", ingredients);
         // console.log("category->", category);
@@ -72,7 +72,7 @@ export default function PostScreen({ navigation }) {
 
         //const formData = JSON.stringify({file, name, userId, ingredients, instructions, category})
 
-        console.log("formdata", formData);
+        // console.log("formdata", formData);
     
         try {
           const response = await fetch('https://foodgram-demo.herokuapp.com/api/upload/', {
@@ -80,7 +80,7 @@ export default function PostScreen({ navigation }) {
             body: formData,
             //headers: { "Content-Type": "multipart/form-data" }
           });
-          console.log("ddd", response);
+         // console.log("ddd", response);
           console.log("Successfully added the recipe!");
           navigation.navigate('Dashboard');
         } catch (e) {
@@ -97,6 +97,10 @@ export default function PostScreen({ navigation }) {
       const handleChangeImage = (event) => {
         setFile(event.target.files[0]);
       }
+      // function handleChangeName(event) {
+      //   setName(event.target.value);
+      // }
+
 
     const HandleChooseImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -106,7 +110,7 @@ export default function PostScreen({ navigation }) {
             quality: 1,
           });
       
-          console.log("ddddddddddddd", result);
+          // console.log("ddddddddddddd", result);
       
           if (!result.cancelled) {
             setFile(result);
@@ -139,12 +143,17 @@ export default function PostScreen({ navigation }) {
                 <Text style={{textAlign:'center', fontSize: 20, marginTop: 15}}>Post New Recipe Here!</Text>
                 <TextInput
                     label="Name"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={name}
                     onChangeText={(text) => setName(text)}
+                    // onChange={handleChangeName}
                 />
                 <TextInput
                     label="Category"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={category}
                     onChangeText={(text) => setCategory(text)}
@@ -165,12 +174,16 @@ export default function PostScreen({ navigation }) {
                 {/* <Image source={{uri: file.uri}}/> */}
                 <TextInput
                     label="Ingredients"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={ingredients}
                     onChangeText={(text) => setIngredients(text)}
                 />
                 <TextInput
                     label="Instructions"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={instructions}
                     onChangeText={(text) => setInstructions(text)}
