@@ -26,51 +26,111 @@ const getData = async () => {
 }
 
 export default function RecipeCard (props, focused) {
-
 	const [user, setUser] = useState();
+	const [thumsUp, setThumbsUp] = useState("#D3D3D3");
+	// const [thumsDown, setThumbsDown] = useState("#D3D3D3");
 
     ;(async () => {
         const data = await getData();
         setUser(data);
     })()
 
-	const Bookmark = async () => {
-		var obj = { userID: user, instructionsID: props._id };
-        var js = JSON.stringify(obj);
+	const toggle = async () => {
+		
+		console.log(thumsUp);
+		// unbookmark
+		if (thumsUp == theme.colors.terciary)
+		{
+			// setThumbsDown(theme.colors.terciary);
+			setThumbsUp("#D3D3D3");
 
-        try {
-          const response = await fetch('https://foodgram-demo.herokuapp.com/api/bookmark', {
-            method: "POST",
-            body: js,
-            headers: { "Content-Type": "application/json" },
-          });
-          var res = JSON.parse(await response.text());
-          console.log({res})
-          
-        } catch (e) {
-          console.log(e.toString());
-        }
+			var obj = { userID: user, instructionsID: props._id };
+			var js = JSON.stringify(obj);
+
+			try {
+			const response = await fetch('https://foodgram-demo.herokuapp.com/api/unbookmark', {
+				method: "POST",
+				body: js,
+				headers: { "Content-Type": "application/json" },
+			});
+			var res = JSON.parse(await response.text());
+			console.log({res})
+			
+			} catch (e) {
+				console.log(e.toString());
+			}
+
+
+		}
+
+		// bookmark
+		else
+		{
+			setThumbsUp(theme.colors.terciary);
+			// setThumbsDown("#D3D3D3");
+
+			var obj = { userID: user, instructionsID: props._id };
+			var js = JSON.stringify(obj);
+
+			try {
+			const response = await fetch('https://foodgram-demo.herokuapp.com/api/bookmark', {
+				method: "POST",
+				body: js,
+				headers: { "Content-Type": "application/json" },
+			});
+			var res = JSON.parse(await response.text());
+			console.log({res})
+			
+			} catch (e) {
+				console.log(e.toString());
+			}
+		}
 	}
 
-	const UnBookmark = async () => {
-		var obj = { userID: user, instructionsID: props._id };
-        var js = JSON.stringify(obj);
+	// const Bookmark = async () => {
+	// 	setThumbsUp(theme.colors.terciary);
+	// 	setThumbsDown("#D3D3D3");
 
-        try {
-          const response = await fetch('https://foodgram-demo.herokuapp.com/api/unbookmark', {
-            method: "POST",
-            body: js,
-            headers: { "Content-Type": "application/json" },
-          });
-          var res = JSON.parse(await response.text());
-          console.log({res})
+	// 	var obj = { userID: user, instructionsID: props._id };
+    //     var js = JSON.stringify(obj);
+
+    //     try {
+    //       const response = await fetch('https://foodgram-demo.herokuapp.com/api/bookmark', {
+    //         method: "POST",
+    //         body: js,
+    //         headers: { "Content-Type": "application/json" },
+    //       });
+    //       var res = JSON.parse(await response.text());
+    //       console.log({res})
           
-        } catch (e) {
-          console.log(e.toString());
-        }
-	}
+    //     } catch (e) {
+    //       console.log(e.toString());
+    //     }
+	// }
+
+	// const UnBookmark = async () => {
+	// 	setThumbsDown(theme.colors.terciary);
+	// 	setThumbsUp("#D3D3D3");
+
+	// 	var obj = { userID: user, instructionsID: props._id };
+    //     var js = JSON.stringify(obj);
+
+    //     try {
+    //       const response = await fetch('https://foodgram-demo.herokuapp.com/api/unbookmark', {
+    //         method: "POST",
+    //         body: js,
+    //         headers: { "Content-Type": "application/json" },
+    //       });
+    //       var res = JSON.parse(await response.text());
+    //       console.log({res})
+          
+    //     } catch (e) {
+    //       console.log(e.toString());
+    //     }
+	// }
 
 	return (
+
 		<Card 
 			style={{
 			backgroundColor: theme.colors.surface,
@@ -97,14 +157,14 @@ export default function RecipeCard (props, focused) {
 							right: -5,
 							marginRight: 10,
 						}}
-						name="thumbs-up" 
-						size={25} 
-						color={focused ? "#D3D3D3" : theme.colors.terciary}
-						onPress={Bookmark}
+						name="heart" 
+						size={20} 
+						color={thumsUp}
+						onPress={toggle}
 					// style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}} 
 					/>
 				</TouchableOpacity>
-				<TouchableOpacity>
+				{/* <TouchableOpacity>
 					<FontAwesome 
 						style={{
 							alignItems: 'center',
@@ -113,17 +173,17 @@ export default function RecipeCard (props, focused) {
 						}}
 						name="thumbs-down" 
 						size={25} 
-						color={focused ? "#D3D3D3" : theme.colors.terciary}
+						color={thumsDown}
 						onPress={UnBookmark}
 					// style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}} 
 					/>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 				<Button style={{
 						alignItems: 'center',
 						justifyContent: 'center',
-						right: -10,
+						right: -5,
 					}}
-					mode="text" 
+					mode="outlined" 
 					onPress={props.onPress}
 				>
 					Details
