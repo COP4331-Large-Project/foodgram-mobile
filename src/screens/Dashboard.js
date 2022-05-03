@@ -97,7 +97,7 @@ export default function Dashboard ({ navigation, focused }) {
                     image: recipeCard.imagePath, 
                     title: recipeCard.name, 
                     ingredients: recipeCard.ingredients, 
-                    description: recipeCard.description,
+                    description: recipeCard.instructions,
                     firstName: recipeCard.firstName, 
                     lastName: recipeCard.lastName, 
                 })}

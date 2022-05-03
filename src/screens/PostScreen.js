@@ -2,11 +2,10 @@ import * as React from 'react';
 import { Text, View, StyleSheet, Button, TouchableOpacity, Image } from 'react-native';
 import TextInput from '../components/TextInput';
 import { useState } from 'react';
-import Buttonn from '../components/Button';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import DocumentPicker from 'react-native-document-picker';
+
 
 
 const getData = async () => {

@@ -10,7 +10,7 @@ import {
 
 // const rightContent = props => <Avatar.Icon {...props} icon="folder" />
 
-export default function DetailsScreen({ route, goBack, navigation }) {
+export default function DetailsScreen({ route, navigation, goBack}) {
 
     const {
       recipeId, 
@@ -30,11 +30,8 @@ export default function DetailsScreen({ route, goBack, navigation }) {
               source={require('../assets/arrow_back.png')}
             />
           </TouchableOpacity>
-          {/* <Header>
-            {route.params.title}
-          </Header> */}
+          <Card.Title style={styles.cardHeader} title="Recipe Details" subtitle="Get in my Belly!"/>
           <ScrollView>
-            <Card.Title style={styles.cardHeader} title="Recipe Details" subtitle="Get in my Belly!"/>
             <Card style={styles.card}>
               <Card.Content>
               <Title>{route.params.title}</Title>
@@ -60,11 +57,12 @@ const styles = StyleSheet.create({
       width: '100%',
       maxWidth: 390,
       alignSelf: 'center',
-      //alignItems: 'center',
+      alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: theme.colors.surface,
     },
     Scroll: {
+      paddingTop: 10,
       backgroundColor: '#F8F8F8',
     },
     container: {
@@ -73,6 +71,7 @@ const styles = StyleSheet.create({
       left: 20,
     },
     image: {
+      top: 20,
       width: 30,
       height: 30,
     },

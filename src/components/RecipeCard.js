@@ -98,7 +98,7 @@ export default function RecipeCard (props, focused) {
 							marginRight: 10,
 						}}
 						name="thumbs-up" 
-						size={30} 
+						size={25} 
 						color={focused ? "#D3D3D3" : theme.colors.terciary}
 						onPress={Bookmark}
 					// style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}} 
@@ -112,7 +112,7 @@ export default function RecipeCard (props, focused) {
 							right: -5,
 						}}
 						name="thumbs-down" 
-						size={30} 
+						size={25} 
 						color={focused ? "#D3D3D3" : theme.colors.terciary}
 						onPress={UnBookmark}
 					// style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}} 
