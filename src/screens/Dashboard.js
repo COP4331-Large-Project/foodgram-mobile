@@ -94,6 +94,12 @@ export default function Dashboard ({ navigation, focused }) {
               <RecipeCard 
                 onPress={() => navigation.navigate('DetailsScreen', {
                   recipeId: recipeCard._id,
+                  image: recipeCard.imagePath,
+                  title: recipeCard.name,
+                  ingredients: recipeCard.ingredients,
+                  description: recipeCard.instructions,
+                  firstName: recipeCard.firstName,
+                  lastName: recipeCard.lastName,
                 })}
                 key={recipeCard._id} 
                 image={{uri: recipeCard.imagePath}} 
