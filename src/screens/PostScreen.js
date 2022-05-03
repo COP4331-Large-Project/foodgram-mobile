@@ -4,9 +4,9 @@ import TextInput from '../components/TextInput';
 import { useState } from 'react';
 import Buttonn from '../components/Button';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
-import * as PhotoPicker from 'expo-image-picker';
-import axios from 'axios';
+import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DocumentPicker from 'react-native-document-picker';
 
 const getData = async () => {
     try {
@@ -23,7 +23,7 @@ const getData = async () => {
   }
 
 export default function PostScreen({ navigation }) {
-
+    const hiddenFileInput = React.useRef()
     const [name, setName] = useState()
     const [ingredients, setIngredients] = useState()
     const [instructions, setInstructions] = useState()
@@ -41,7 +41,12 @@ export default function PostScreen({ navigation }) {
 
     const PostRecipe = async (event) => {
         event.preventDefault();
-    
+        
+        const data = await AsyncStorage.getItem('user_data');
+        const user = JSON.parse(data);
+        const firstName = user.firstName;
+        const lastName = user.lastName;
+
         // console.log(userID);
         // console.log("name->", name);
          console.log("file->", file);
@@ -55,16 +60,18 @@ export default function PostScreen({ navigation }) {
         // }
     
         var formData = new FormData();
-        formData.append("file", file.uri);
+        formData.append("file", file);
         formData.append("name", name);
         formData.append("userId", userId);
+        formData.append("firstName", firstName);
+        formData.append("lastName", lastName);
         formData.append("ingredients", ingredients);
         formData.append("instructions", instructions);
         formData.append("category", category);
 
         //const formData = JSON.stringify({file, name, userId, ingredients, instructions, category})
 
-        console.log(formData)
+        console.log("formdata", formData);
     
         try {
           const response = await fetch('https://foodgram-demo.herokuapp.com/api/upload/', {
@@ -72,45 +79,37 @@ export default function PostScreen({ navigation }) {
             body: formData,
             //headers: { "Content-Type": "multipart/form-data" }
           });
-
-            // const response = await axios.post('https://foodgram-demo.herokuapp.com/api/upload/', formData, {
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     }
-            // })
-          var result = await response.text()
-          console.log({result})
-          var res = JSON.parse(await response.text());
-          //console.log(res.name)
+          console.log("ddd", response);
           console.log("Successfully added the recipe!");
-         
+          navigation.navigate('Dashboard');
         } catch (e) {
-          //console.log("error->", e.toString());
           console.log(e)
           setMessage(e.toString());
           return;
         }
       };
 
+      const selectImage = () => {
+        hiddenFileInput.current.click();
+      }
+
+      const handleChangeImage = (event) => {
+        setFile(event.target.files[0]);
+      }
+
     const HandleChooseImage = async () => {
-        const permissionResult = await PhotoPicker.requestMediaLibraryPermissionsAsync();
-
-        if (permissionResult.granted === false) {
-            alert("You've refused to allow this app to access your photos!");
-            return;
-        }
-
-        const result = await PhotoPicker.launchImageLibraryAsync({allowsEditing:true});
-
-        //console.log({result});
-        // Explore the result
-        result.uri = result.uri.replace('file://', '')
-        console.log({result});
-
-        if (!result.cancelled) {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [4, 3],
+            quality: 1,
+          });
+      
+          console.log("ddddddddddddd", result);
+      
+          if (!result.cancelled) {
             setFile(result);
-            console.log(result.uri);
-        }
+          }
     }
 
     const HandleTakeImage = async () => {
@@ -149,10 +148,16 @@ export default function PostScreen({ navigation }) {
                     value={category}
                     onChangeText={(text) => setCategory(text)}
                 />
-                <TouchableOpacity onPress={HandleChooseImage} style={styles.image}>
+                <TouchableOpacity onPress={selectImage} style={styles.image}>
+                  <div>
+                    <input ref={hiddenFileInput} type="file" onChange={handleChangeImage} style={{display:'none'}}/>
+                  </div>
                     <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Pick a photo</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={HandleTakeImage} style={styles.image}>
+                <TouchableOpacity onPress={selectImage} style={styles.image}>
+                    <div>
+                      <input ref={hiddenFileInput} type="file" onChange={handleChangeImage} style={{display:'none'}}/>
+                    </div>
                     <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Take a photo</Text>
                 </TouchableOpacity>
                 {/* {file && <Image source={{ uri: file }} style={{ width: 200, height: 200, justifyContent:'center', alignContent:'center', left: 100 }} />} */}
