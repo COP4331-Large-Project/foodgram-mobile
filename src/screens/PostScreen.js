@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { SafeAreaView, ScrollView, StatusBar } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { theme } from '../core/theme';
 
 
 
@@ -202,6 +203,7 @@ const styles = StyleSheet.create({
     Safe: {
       flex: 1,
       paddingTop: StatusBar.currentHeight,
+      backgroundColor: theme.colors.surface,
     },
     image: {
         alignItems: 'center',

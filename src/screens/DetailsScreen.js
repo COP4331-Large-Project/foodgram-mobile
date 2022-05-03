@@ -30,7 +30,7 @@ export default function DetailsScreen({ route, navigation, goBack}) {
               source={require('../assets/arrow_back.png')}
             />
           </TouchableOpacity>
-          <Card.Title style={styles.cardHeader} title="Recipe Details" subtitle="Get in my Belly!"/>
+          <Card.Title style={styles.cardHeader} title="Recipe Details" />
           <ScrollView>
             <Card style={styles.card}>
               <Card.Content>

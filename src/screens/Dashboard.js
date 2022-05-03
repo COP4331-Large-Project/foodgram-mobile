@@ -48,8 +48,9 @@ export default function Dashboard ({ navigation, focused }) {
   })()
 
   useEffect(() => {
+    let isMounted = true;
     loadFeed("");
-  }, [recipeCards]);
+  }, []);
 
   const loadFeed = async (query) => {
     var obj = { search: query };
