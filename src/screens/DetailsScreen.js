@@ -34,15 +34,15 @@ export default function DetailsScreen({ route, navigation, goBack}) {
           <ScrollView>
             <Card style={styles.card}>
               <Card.Content>
-              <Title>{route.params.title}</Title>
-              <Card.Cover source={{uri: route.params.image}}/>
-              <Paragraph>By: {route.params.firstName} {route.params.lastName}</Paragraph>
-              <Paragraph></Paragraph>
-              <Paragraph>Ingredients:</Paragraph>
-              <Paragraph>{route.params.ingredients}</Paragraph>
-              <Paragraph></Paragraph>
-              <Paragraph>Instructions:</Paragraph>
-              <Paragraph>{route.params.description}</Paragraph>
+                <Title>{route.params.title}</Title>
+                <Card.Cover source={{uri: route.params.image}}/>
+                <Paragraph>By: {route.params.firstName} {route.params.lastName}</Paragraph>
+                <Paragraph></Paragraph>
+                <Paragraph>Ingredients:</Paragraph>
+                <Paragraph>{route.params.ingredients}</Paragraph>
+                <Paragraph></Paragraph>
+                <Paragraph>Instructions:</Paragraph>
+                <Paragraph>{route.params.description}</Paragraph>
               </Card.Content>
             </Card>
           </ScrollView>
@@ -75,11 +75,6 @@ const styles = StyleSheet.create({
       width: 30,
       height: 30,
     },
-    recipeImage: {
-      marginTop: 30,
-      width: 370,
-      height: 270,
-    },
     cardHeader: {
       top: 10,
       left: 100,
@@ -91,6 +86,7 @@ const styles = StyleSheet.create({
 			borderRadius: 30,
 			display: "flex",
 			flexDirection: "column",
+
     },
     // Scroll: {
     //   // backgroundColor: '#C3B1E1',
