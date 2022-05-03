@@ -3,7 +3,7 @@ import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet, Sta
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
 import RecipeCard from '../components/RecipeCard'
-
+import Button from '../components/Button'
 const getData = async () => {
     try {
       const data = await AsyncStorage.getItem('user_data');
@@ -63,10 +63,13 @@ export default function MyRecipesScreen({ navigation }) {
     
     return (
         <SafeAreaView style={styles.Safe}>
+            <Button mode="contained" onPress={loadMyRecipes}>
+              Load them all
+            </Button>
             <ScrollView>
-            <TouchableOpacity onPress={loadMyRecipes} style={styles.image}>
+            {/* <TouchableOpacity onPress={loadMyRecipes} style={styles.image}>
                 <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Load them all</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
               {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
               return (
                 <RecipeCard 

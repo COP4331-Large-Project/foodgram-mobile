@@ -2,7 +2,8 @@ import * as React from 'react';
 import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, StyleSheet, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useState } from 'react';
-import RecipeCard from '../components/RecipeCard'
+import RecipeCard from '../components/RecipeCard';
+import Button from '../components/Button';
 
 const getData = async () => {
     try {
@@ -63,10 +64,13 @@ export default function LikedRecipesScreen({ navigation }) {
     
     return (
         <SafeAreaView style={styles.Safe}>
+            <Button mode="contained" onPress={loadLiked}>
+              Load them all
+            </Button>
             <ScrollView>
-            <TouchableOpacity onPress={loadLiked} style={styles.image}>
+            {/* <TouchableOpacity onPress={loadLiked} style={styles.image}>
                 <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Load them all</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
               {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
               return (
                 <RecipeCard 
