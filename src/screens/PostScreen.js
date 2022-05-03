@@ -97,6 +97,10 @@ export default function PostScreen({ navigation }) {
       const handleChangeImage = (event) => {
         setFile(event.target.files[0]);
       }
+      // function handleChangeName(event) {
+      //   setName(event.target.value);
+      // }
+
 
     const HandleChooseImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -139,12 +143,17 @@ export default function PostScreen({ navigation }) {
                 <Text style={{textAlign:'center', fontSize: 20, marginTop: 15}}>Post New Recipe Here!</Text>
                 <TextInput
                     label="Name"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={name}
                     onChangeText={(text) => setName(text)}
+                    // onChange={handleChangeName}
                 />
                 <TextInput
                     label="Category"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={category}
                     onChangeText={(text) => setCategory(text)}
@@ -165,12 +174,16 @@ export default function PostScreen({ navigation }) {
                 {/* <Image source={{uri: file.uri}}/> */}
                 <TextInput
                     label="Ingredients"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={ingredients}
                     onChangeText={(text) => setIngredients(text)}
                 />
                 <TextInput
                     label="Instructions"
+                    multiline
+                    rows={1}
                     returnKeyType="next"
                     value={instructions}
                     onChangeText={(text) => setInstructions(text)}
