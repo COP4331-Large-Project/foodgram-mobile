@@ -66,7 +66,7 @@ const Tabs = () => {
                     }
                 }} 
             />
-            <Tab.Screen 
+            {/* <Tab.Screen 
                 name='Post' 
                 component={PostScreen} 
                 options={{
@@ -86,7 +86,7 @@ const Tabs = () => {
                         );
                     },
                 }} 
-            />
+            /> */}
             <Tab.Screen 
                 name='Liked Recipes' 
                 component={LikedRecipesScreen} 
