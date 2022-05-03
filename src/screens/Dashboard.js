@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../components/Header'
 import { useState, useEffect } from 'react';
-import { Button, ImageBackground, SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
+import { SafeAreaView, ScrollView, TouchableOpacity, StatusBar, StyleSheet, TextInput } from 'react-native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { theme } from '../core/theme'
 import RecipeCard from '../components/RecipeCard'
@@ -48,7 +48,6 @@ export default function Dashboard ({ navigation, focused }) {
   })()
 
   useEffect(() => {
-    console.log("dddddddddddddddddddddddddd");
     loadFeed("");
   }, [recipeCards]);
 
@@ -93,8 +92,14 @@ export default function Dashboard ({ navigation, focused }) {
           {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
             return (
               <RecipeCard 
-                onPress={() => navigation.navigate('DetailsScreen', {
-                  recipeId: recipeCard._id,
+                  onPress={() => navigation.navigate('DetailsScreen', {
+                    recipeId: recipeCard._id,
+                    image: recipeCard.imagePath, 
+                    title: recipeCard.name, 
+                    ingredients: recipeCard.ingredients, 
+                    description: recipeCard.description,
+                    firstName: recipeCard.firstName, 
+                    lastName: recipeCard.lastName, 
                 })}
                 key={recipeCard._id} 
                 image={{uri: recipeCard.imagePath}} 
@@ -124,7 +129,6 @@ const styles = StyleSheet.create({
   },
 
   Scroll: {
-    // backgroundColor: '#C3B1E1',
     backgroundColor: theme.colors.surface,
   },
 
