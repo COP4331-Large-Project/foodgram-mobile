@@ -34,23 +34,25 @@ export default function DetailsScreen({ route, goBack, navigation }) {
               source={require('../assets/arrow_back.png')}
           />
           </TouchableOpacity>
-          <Header>
+          {/* <Header>
             {route.params.title}
-          </Header>
-          <Card.Title style={styles.cardHeader} title="Recipe Details" subtitle="Get in my Belly!" right={rightContent}/>
-          <Card style={styles.card}>
-            <Card.Content>
-            <Title>{route.params.title}</Title>
-            <Card.Cover source={{uri: route.params.image}}/>
-            <Paragraph>By: {route.params.firstName} {route.params.lastName}</Paragraph>
-            <Paragraph></Paragraph>
-            <Paragraph>Ingredients:</Paragraph>
-            <Paragraph>{route.params.ingredients}</Paragraph>
-            <Paragraph></Paragraph>
-            <Paragraph>Instructions:</Paragraph>
-            <Paragraph>{route.params.description}</Paragraph>
-            </Card.Content>
-          </Card>
+          </Header> */}
+          <ScrollView>
+            <Card.Title style={styles.cardHeader} title="Recipe Details" subtitle="Get in my Belly!" right={rightContent}/>
+            <Card style={styles.card}>
+              <Card.Content>
+              <Title>{route.params.title}</Title>
+              <Card.Cover source={{uri: route.params.image}}/>
+              <Paragraph>By: {route.params.firstName} {route.params.lastName}</Paragraph>
+              <Paragraph></Paragraph>
+              <Paragraph>Ingredients:</Paragraph>
+              <Paragraph>{route.params.ingredients}</Paragraph>
+              <Paragraph></Paragraph>
+              <Paragraph>Instructions:</Paragraph>
+              <Paragraph>{route.params.description}</Paragraph>
+              </Card.Content>
+            </Card>
+          </ScrollView>
       </SafeAreaView>
     );
 }
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
       width: '100%',
       maxWidth: 390,
       alignSelf: 'center',
-      alignItems: 'center',
+      //alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: theme.colors.surface,
     },

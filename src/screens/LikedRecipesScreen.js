@@ -67,11 +67,26 @@ export default function LikedRecipesScreen({ navigation }) {
             <TouchableOpacity onPress={loadLiked} style={styles.image}>
                 <Text style={{color:'white', fontWeight: 'bold', fontSize: 15, lineHeight: 26,}}>Load them all</Text>
             </TouchableOpacity>
-                {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
-                return (
-                    <RecipeCard key={recipeCard._id} image={{uri: recipeCard.imagePath}} title={recipeCard.name} description={recipeCard.instructions} {...recipeCard}/>
-                );
-                }) : null }
+              {recipeCards.length > 0 ? recipeCards.map((recipeCard, i) => {
+              return (
+                <RecipeCard 
+                  onPress={() => navigation.navigate('DetailsScreen', {
+                    recipeId: recipeCard._id,
+                    image: recipeCard.imagePath,
+                    title: recipeCard.name,
+                    ingredients: recipeCard.ingredients,
+                    description: recipeCard.instructions,
+                    firstName: recipeCard.firstName,
+                    lastName: recipeCard.lastName,
+                  })}
+                  key={recipeCard._id} 
+                  image={{uri: recipeCard.imagePath}} 
+                  title={recipeCard.name} 
+                  description={recipeCard.instructions} 
+                  {...recipeCard}
+                />
+              );
+              }) : null }
             </ScrollView>
         </SafeAreaView>
     );

@@ -72,17 +72,19 @@ export default function Dashboard ({ navigation, focused }) {
 
   return (
       <SafeAreaView style={styles.Safe}>
-        <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
-          <MaterialIcons 
-            name="logout" 
-            size={24} 
-            color={focused ? theme.colors.terciary : theme.colors.primary}
-            style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}}
-          />
-        </TouchableOpacity>
-        <Header>
-          Welcome
-        </Header>
+        <SafeAreaView style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
+            <MaterialIcons 
+              name="logout" 
+              size={24} 
+              color={focused ? theme.colors.terciary : theme.colors.primary}
+              style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}}
+            />
+          </TouchableOpacity>
+          <Header>
+            Welcome
+          </Header>
+        </SafeAreaView>
         <SearchInput
           label="Search"
           onChangeText={(text) => loadFeed(text)}
@@ -122,7 +124,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 390,
     alignSelf: 'center',
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
     backgroundColor: theme.colors.surface,
