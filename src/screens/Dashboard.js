@@ -48,9 +48,8 @@ export default function Dashboard ({ navigation, focused }) {
   })()
 
   useEffect(() => {
-    console.log("dddddddddddddddddddddddddd");
     loadFeed("");
-  }, [recipeCards]);
+  }, []);
 
   const loadFeed = async (query) => {
     var obj = { search: query };
@@ -73,17 +72,19 @@ export default function Dashboard ({ navigation, focused }) {
 
   return (
       <SafeAreaView style={styles.Safe}>
-        <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
-          <MaterialIcons 
-            name="logout" 
-            size={24} 
-            color={focused ? theme.colors.terciary : theme.colors.primary}
-            style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}}
-          />
-        </TouchableOpacity>
-        <Header>
-          Welcome
-        </Header>
+        <SafeAreaView style={{alignItems: 'center'}}>
+          <TouchableOpacity onPress={() => navigation.navigate('StartScreen')}>
+            <MaterialIcons 
+              name="logout" 
+              size={24} 
+              color={focused ? theme.colors.terciary : theme.colors.primary}
+              style={{alignItems: 'center', justifyContent: 'center', top: 30, right: -160}}
+            />
+          </TouchableOpacity>
+          <Header>
+            Welcome
+          </Header>
+        </SafeAreaView>
         <SearchInput
           label="Search"
           onChangeText={(text) => loadFeed(text)}
@@ -95,6 +96,12 @@ export default function Dashboard ({ navigation, focused }) {
               <RecipeCard 
                 onPress={() => navigation.navigate('DetailsScreen', {
                   recipeId: recipeCard._id,
+                  image: recipeCard.imagePath,
+                  title: recipeCard.name,
+                  ingredients: recipeCard.ingredients,
+                  description: recipeCard.instructions,
+                  firstName: recipeCard.firstName,
+                  lastName: recipeCard.lastName,
                 })}
                 key={recipeCard._id} 
                 image={{uri: recipeCard.imagePath}} 
@@ -117,7 +124,7 @@ const styles = StyleSheet.create({
     width: '100%',
     maxWidth: 390,
     alignSelf: 'center',
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
     paddingTop: StatusBar.currentHeight,
     backgroundColor: theme.colors.surface,
